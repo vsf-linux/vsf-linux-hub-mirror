@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout vsf
+    - name: checkout vsf.linux
       uses: actions/checkout@v2
       with:
         repository: vsf-linux/vsf.linux
@@ -21,7 +21,7 @@ jobs:
     - name: get all repos
       id: repos
       run: |
-        repos="$(cat .gitmodules |grep -E 'url.*\.\.\/' | cut -d'/' -f2- | tr '\n' ',')"
+        repos="vsf.linux,$(cat .gitmodules |grep -E 'url.*\.\.\/' | cut -d'/' -f2- | tr '\n' ',')"
         echo "${repos::-1}"
         echo "::set-output name=static_list::${repos::-1}"
       shell: bash
